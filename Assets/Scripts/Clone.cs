@@ -17,8 +17,11 @@ public class Clone : MonoBehaviour {
 		positionListX.AddRange(PlayerPrefsX.GetFloatArray("cloneX" + cloneNumber.ToString()));
 		positionListY.AddRange(PlayerPrefsX.GetFloatArray("cloneY" + cloneNumber.ToString()));
 		if(name == "Clone(Clone)") {
+			GetComponent<Rigidbody2D>().isKinematic = false;
 			StartCoroutine(startCloneWalk());
 			StartCoroutine (startCloneJump());
+		} else {
+			GetComponent<Rigidbody2D>().isKinematic = true;
 		}
 	}
 

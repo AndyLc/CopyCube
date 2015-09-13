@@ -7,7 +7,9 @@ public class Gate : MonoBehaviour {
 	public GameObject button;
 	// Use this for initialization
 	void Start () {
-		topPos = new Vector3(transform.position.x, transform.position.y + 4f, 0f);
+		if(topPos.y == 0f || topPos.y == null) {
+			topPos = new Vector3(transform.position.x, transform.position.y + 4f, 0f);
+		}
 		bottomPos = transform.position;
 	}
 	

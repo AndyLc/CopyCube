@@ -18,6 +18,9 @@ public class Button : MonoBehaviour {
 			} else if (Mathf.Round(startPosition.y * 100f) <= Mathf.Round(transform.position.y * 100f)){
 				transform.position = startPosition;
 			}
+			Vector3 position = transform.position;
+			position.x = startPosition.x;
+			transform.position = position;
 		}
 	}
 

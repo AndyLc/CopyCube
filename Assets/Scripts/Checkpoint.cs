@@ -8,12 +8,12 @@ public class Checkpoint : MonoBehaviour {
 	public bool hit = false;
 	// Use this for initialization
 	void Start () {
-		newColor = new Color(camera.backgroundColor.r - 0.1f, camera.backgroundColor.g - 0.1f, camera.backgroundColor.b - 0.1f);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if(hit) {
+			newColor = new Color(camera.backgroundColor.r - 0.1f, camera.backgroundColor.g - 0.1f, camera.backgroundColor.b - 0.1f);
 			Color color = GetComponent<SpriteRenderer>().color;
 			color = Color.Lerp (color, newColor, 0.2f);
 			GetComponent<SpriteRenderer>().color = color;

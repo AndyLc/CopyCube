@@ -66,11 +66,11 @@ public class HorizontalScrollSnap : MonoBehaviour
 
         ChangeBulletsInfo(CurrentScreen());
 
-        if (NextButton)
-            NextButton.GetComponent<Button>().onClick.AddListener(() => { NextScreen(); });
+       // if (NextButton)
+       //     NextButton.GetComponent<Button>().onClick.AddListener(() => { NextScreen(); });
 
-        if (PrevButton)
-            PrevButton.GetComponent<Button>().onClick.AddListener(() => { PreviousScreen(); });
+       // if (PrevButton)
+       //     PrevButton.GetComponent<Button>().onClick.AddListener(() => { PreviousScreen(); });
     }
 
     void Update()

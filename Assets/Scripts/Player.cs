@@ -23,13 +23,29 @@ public class Player : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if(GetComponent<Rigidbody2D>().angularVelocity > -60f) {
+			GetComponent<Rigidbody2D>().angularVelocity = -60f;
+		}
+		foreach (Touch touch in Input.touches) {
+			if (touch.phase == TouchPhase.Began && touch.position.x < Screen.width/2 && jumpCount < 1) {
+				GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, 16f);
+				GetComponent<Rigidbody2D>().AddTorque(-15f);
+				jumpCount++;
+			} else if ((touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary) && touch.position.x > Screen.width/2) {
+				if(GetComponent<Rigidbody2D>().velocity.x < 3.5f) {
+					GetComponent<Rigidbody2D>().AddForce (new Vector2(60f, 0f));
+				}
+			}
+		}
 		if(Input.GetKey (KeyCode.RightArrow)) {
-			GetComponent<Rigidbody2D>().velocity = new Vector2(3f, GetComponent<Rigidbody2D>().velocity.y);
+			if(GetComponent<Rigidbody2D>().velocity.x < 3.5f) {
+				GetComponent<Rigidbody2D>().AddForce (new Vector2(60f, 0f));
+			}
 		}
 		if (Input.GetKeyDown (KeyCode.UpArrow) && jumpCount < 1) {
 			Debug.Log ("hit detected");
 			GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, 16f);
-			//GetComponent<Rigidbody2D>().AddTorque(-10f);
+			GetComponent<Rigidbody2D>().AddTorque(-15f);
 			jumpCount++;
 		}
 		if(Input.GetKeyDown (KeyCode.Q)) {
@@ -42,8 +58,10 @@ public class Player : MonoBehaviour {
 		transform.position = spawnPosition;
 		if(clones.Count != 0) {
 			foreach(GameObject item in clones) {
+				if(item != null) {
 				item.GetComponent<Clone>().StopAllCoroutines();
 				item.GetComponent<Clone>().runCloneMovement();
+				}
 			}
 		}
 		float[] posX = positionListX.ToArray ();
@@ -58,7 +76,7 @@ public class Player : MonoBehaviour {
 		cloneNumber ++;
 	}
 	void OnCollisionEnter2D(Collision2D coll) {
-		if(coll.gameObject.name == "Ground" || coll.gameObject.name == "ButtonTop" || coll.gameObject.name == "Clone(Clone)") {
+		if(coll.gameObject.name == "Ground" || coll.gameObject.name == "ButtonTop" || coll.gameObject.name == "Clone(Clone)" || coll.gameObject.name == "boulder(Clone)") {
 			Debug.Log ("Collided!");
 			jumpCount = 0;
 		}
@@ -66,6 +84,8 @@ public class Player : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D coll) {
 		if(GameObject.Find ("TutorialText")) {
 			GameObject.Find ("TutorialText").GetComponent<TutorialText>().changeText(coll);
+		} else if (GameObject.Find ("GameText")) {
+			GameObject.Find ("GameText").GetComponent<GameText>().changeText(coll);
 		}
 		if(coll.gameObject.tag == "End") {
 			Application.LoadLevel (coll.name);
