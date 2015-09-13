@@ -42,13 +42,13 @@ public class GameText : MonoBehaviour {
 			Destroy (coll.gameObject);
 			break;
 		case "NewbieLand5":
-			GetComponent<Text>().text = "Just like it was then.";
+			GetComponent<Text>().text = "They always do.";
 			GetComponent<Text>().alignment = TextAnchor.MiddleRight;
 			StartCoroutine(display(2f));
 			Destroy (coll.gameObject);
 			break;
 		case "NewbieLand6":
-			GetComponent<Text>().text = "Every day I wake";
+			GetComponent<Text>().text = "After every beggining";
 			GetComponent<Text>().alignment = TextAnchor.MiddleRight;
 			StartCoroutine(display(1f));
 			Destroy (coll.gameObject);
@@ -108,7 +108,7 @@ public class GameText : MonoBehaviour {
 			Destroy (coll.gameObject);
 		break;
 		case "NewbieLand15":
-			GetComponent<Text>().text = "Who are they?";
+			GetComponent<Text>().text = "Such as what I had found then.";
 			GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
 			StartCoroutine(expandCamera(1f/2.0f, true));
 			StartCoroutine(display(2f));

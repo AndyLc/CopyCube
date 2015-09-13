@@ -11,7 +11,7 @@ public class Player : MonoBehaviour {
 	public int cloneNumber;
 	public List<GameObject> clones;
 	public static Vector3 spawnPosition;
-	public static int jumpCount;
+	public int jumpCount;
 	// Use this for initialization
 	void Start () {
 		jumpCount = 0;
@@ -27,10 +27,9 @@ public class Player : MonoBehaviour {
 			GetComponent<Rigidbody2D>().angularVelocity = -60f;
 		}
 		foreach (Touch touch in Input.touches) {
-			if (touch.phase == TouchPhase.Began && touch.position.x < Screen.width/2 && jumpCount < 1) {
+			if (touch.phase == TouchPhase.Began && touch.position.x < Screen.width/2) {
 				GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, 16f);
 				GetComponent<Rigidbody2D>().AddTorque(-15f);
-				jumpCount++;
 			} else if ((touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary) && touch.position.x > Screen.width/2) {
 				if(GetComponent<Rigidbody2D>().velocity.x < 3.5f) {
 					GetComponent<Rigidbody2D>().AddForce (new Vector2(60f, 0f));
@@ -40,6 +39,11 @@ public class Player : MonoBehaviour {
 		if(Input.GetKey (KeyCode.RightArrow)) {
 			if(GetComponent<Rigidbody2D>().velocity.x < 3.5f) {
 				GetComponent<Rigidbody2D>().AddForce (new Vector2(60f, 0f));
+			}
+		}
+		if(Input.GetKey (KeyCode.LeftArrow)) {
+			if(GetComponent<Rigidbody2D>().velocity.x > -3.5f) {
+				GetComponent<Rigidbody2D>().AddForce (new Vector2(-60f, 0f));
 			}
 		}
 		if (Input.GetKeyDown (KeyCode.UpArrow) && jumpCount < 1) {
